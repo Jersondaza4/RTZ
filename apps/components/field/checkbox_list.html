@@ -1,0 +1,27 @@
+{% if show_label %}
+    <div class="field" id="{{ element.auto_id }}">
+        <label class="field__label" for="{{ element.auto_id }}">{{ element.label }}</label>
+    {% endif %}
+    {% slot "input" %}
+        <div class="grid grid-cols-1 gap-2">
+            {% for value, label in element.field.choices %}
+                <label class="check-field">
+                    {% if input_position == 'right' %}<span class="check-field__label">{{ label }}</span>{% endif %}
+                    <input id="{{ element.auto_id }}_{{ forloop.counter }}"
+                           name="{{ element.name }}"
+                           type="checkbox"
+                           {% if element.field.required %}required{% endif %}
+                           {% if element.field.initial == value or element.field.value == value %}checked{% endif %}
+                           {% include "./_attrs.html" %}
+                           {% slot "extra_attrs" %}
+                           {% endslot %}>
+                    {% if input_position != 'right' %}<span class="check-field__label">{{ label }}</span>{% endif %}
+                </label>
+            {% endfor %}
+        </div>
+    {% endslot %}
+    {{ element.errors }}
+    {% if show_help_text and element.help_text %}
+        <div class="field__help-text">{{ element.help_text|safe }}</div>
+    {% endif %}
+    {% if show_label %}</div>{% endif %}

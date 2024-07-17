@@ -1,0 +1,4 @@
+<span class="badge{% if color_variant == 'blue' %} badge--blue{% elif color_variant == 'yellow' %} badge--yellow{% elif color_variant == 'red' %} badge--red{% elif color_variant == 'green' %} badge--green{% elif color_variant == 'gray' %} badge--gray{% endif %}"
+      {% if badge_id %}id="{{ badge_id }}"{% endif %}
+      {% slot "extra_attrs" %}
+      {% endslot %}>{{ text }}</span>

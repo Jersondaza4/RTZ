@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<title>{% block title %}Crear usuario{% endblock title %}</title>
+
+{% block content %}
+<section>
+  <article>
+    <h1>Crear usuario</h1>
+    <!--Begin row-->
+    <div class="row">
+      <!--Begin col-->
+      <div class="column">
+        <form action="" method="post">
+          {% csrf_token %}
+          {{ form.media }}
+          {{form.as_p}}
+          <input type="submit" id="button">
+        </form>
+      </div>
+    </div>
+    <!--End row-->
+  </article>
+</section>
+{% endblock %}

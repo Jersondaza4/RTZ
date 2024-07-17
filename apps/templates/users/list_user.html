@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<title>{% block title %}Listado usuarios{% endblock title %}</title>
+
+{% block content %}
+<h1>Usuarios</h1>
+<!--Begin col-->
+<div class="column">
+    {% if object_list %}
+        <table> <!--SE puede usar datatable, libreria de JS para usar con AJAX-->
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Names</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in object_list %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.names }}</td>
+                        <td>{{ user.email }}</td>
+                    </tr>  
+                {% endfor %}
+                
+            </tbody>
+        </table>
+    {% else %}
+        <p>No existen usuarios</p>
+    {% endif %}
+</div>
+
+{% endblock %}
+
+{% block extrajs %}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="{% static 'js/users/index.js' %}"> //el archivo se ve en source y en network en el navegador
+    
+</script>
+{% endblock extrajs %}

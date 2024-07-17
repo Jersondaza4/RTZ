@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<title>{% block title %}Inicio{% endblock title %}</title>
+
+{% block content %}
+
+<div class="relative flex h-screen">
+  <div class="p-0 m-0 border-none w-full flex">
+      <img class="p-0 m-0 w-full object-cover object-center" src="{% static 'img/fondo.jpeg' %}" />
+  </div>
+  <div class="absolute h-screen left-0 right-0 bottom-0 bg-black bg-opacity-50 text-white p-0 m-0">
+    <div id="indicators-carousel" class="relative h-3/5 w-full p-7 mt-16 px-16">
+      <!-- Carousel wrapper -->
+      <div class="relative h-full overflow-hidden rounded-lg">
+          <!-- Item 1 -->
+          <div class="duration-700 ease-in-out data-carousel-item">
+              <img  src="{% static 'img/f1.jpg' %}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+          </div>
+          <!-- Item 2 -->
+          <div class="hidden duration-700 ease-in-out data-carousel-item">
+              <img  src="{% static 'img/fondo.jpeg' %}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+          </div>
+          <!-- Item 3 -->
+          <div class="hidden duration-700 ease-in-out data-carousel-item">
+              <img  src="{% static 'img/img.png' %}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+          </div>
+      </div>
+      
+      <!-- Slider controls -->
+      <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev id="btnprev">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+              <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" fill="none" viewBox="0 0 6 10">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+              </svg>
+              <span class="sr-only">Previous</span>
+          </span>
+      </button>
+      <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next id="btnnext">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+              <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" fill="none" viewBox="0 0 6 10">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+              </svg>
+              <span class="sr-only">Next</span>
+          </span>
+      </button>
+    </div>
+      <div class="relative grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 bottom-1 text-white mx-auto space-x-12 px-14">
+        <article class="m-2 bg-gray-900 bg-opacity-35 rounded-xl p-4">
+            <div class="flex gap-4">
+                <img class="w-28 h-28 border-white border-2" src="{% static 'img/Grill1.jpg' %}">
+                <div>
+                <h2>Verstapen</h2>
+                <p class="text-xs mb-2">
+                    Mantente al día con las últimas novedades del mundo de las carreras de automovilismo. Descubre noticias emocionantes, resultados en tiempo real y cobertura de eventos en nuestro portal de noticias.
+                </p>
+                {% component "button_link" text="Más información" type_button="submit" link=news_list_url %}{% endcomponent %}
+              </div>
+            </div>
+        </article>
+        <article class="m-2 bg-gray-900 bg-opacity-35 rounded-xl p-4 hidden lg:block">
+            <div class="flex gap-4">
+                <img class="w-28 h-28 border-white border-2" src="{% static 'img/salad1.jpg' %}">
+                <div>
+                <h2><!--Eventos-->Leclerc</h2>
+                <p class="text-xs mb-2">
+                    Explora nuestros eventos emocionantes de carreras de automovilismo. Desde competencias en pista hasta encuentros de entusiastas, descubre dónde y cuándo suceden las próximas experiencias automovilísticas.
+                </p>
+                {% component "button_link" text="Más información" type_button="submit" link=news_list_url %}{% endcomponent %}
+              </div>
+            </div>
+        </article>
+      </div>
+  </div>
+</div>
+
+  <section class="bg-black bg-opacity-90 lg:max-w-none text-white p-5 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-4">
+    <article class="p-4 pr-4 border-[1px] border-white rounded-xl flex flex-col bg-gray-900 bg-opacity-35">
+      <h2>Noticias</h2>
+      <img src="{% static 'img/Grill1.jpg' %}">
+      <p>
+        Mantente al día con las últimas novedades del mundo de las carreras de automovilismo. Descubre noticias emocionantes, resultados en tiempo real y cobertura de eventos en nuestro portal de noticias.
+      </p>
+      <div class="mt-auto">
+        {% url 'news_list' as news_list_url %}
+        {% component "button_link" text="Ver noticias" type_button="submit" link=news_list_url %}{% endcomponent %}
+      </div>
+    </article>
+    <article class="p-4 pr-4 border-[1px] border-white rounded-xl flex flex-col bg-gray-900 bg-opacity-35">
+      <h2><!--Eventos-->Eventos</h2>
+      <img src="{% static 'img/salad1.jpg' %}">
+      <p>
+        Explora nuestros eventos emocionantes de carreras de automovilismo. Desde competencias en pista hasta encuentros de entusiastas, descubre dónde y cuándo suceden las próximas experiencias automovilísticas.
+      </p>
+      <div class="mt-auto">
+        {% url 'events' as events_url %}
+        {% component "button_link" text="Ver eventos" type_button="submit" link=events_url %}{% endcomponent %}
+      </div>
+      <div class="mt-auto">
+        {% url 'create_event' as create_event_url %}
+        {% component "button_link" text="Crear evento" type_button="submit" link=create_event_url %}{% endcomponent %}
+      </div>
+    </article>
+    <article class="p-4 pr-4 border-[1px] border-white rounded-xl flex flex-col bg-gray-900 bg-opacity-35">
+      <h2>Contactenos</h2>
+      <img src="{% static 'img/head_chef1.jpg' %}">
+      <p>
+        Somos apasionados por las carreras de automovilismo. Conoce nuestra historia, nuestro equipo y nuestra misión de ofrecer información y experiencias emocionantes para los amantes de las carreras.
+      </p>
+      <ul class="text-base">
+        <li>Mon - Fri: 2pm - 10pm</li>
+        <li>Sat: 2pm - 11pm</li>
+        <li>Sun: 2pm - 9pm</li>
+      </ul>
+      <div class="mt-auto">
+        {% url 'contact' as contact_url %}
+        {% component "button_link" text="Formulario" type_button="submit" link=contact_url %}{% endcomponent %}
+      </div>
+    </article>
+    <article class="p-4 pr-4 border-[1px] border-white rounded-xl flex flex-col bg-gray-900 bg-opacity-35">
+      <h2>Clubes</h2>
+      <img src="{% static 'img/salad1.jpg' %}">
+      <p>
+        Conoce los clubes aliados y sus eventos, quiza te animes a inscribirte a uno de ellos
+      </p>
+      <div class="mt-auto">
+        {% url 'clubs' as clubs_url %}
+        {% component "button_link" text="Ver clubes" type_button="submit" link=clubs_url %}{% endcomponent %}
+      </div>
+    </article>
+  </section>
+
+{% endblock %}
+
+{% block extrajs %}
+  <script src="{% static 'js/users/index.js' %}"></script>
+{% endblock extrajs %}

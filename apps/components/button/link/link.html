@@ -1,0 +1,5 @@
+<a class="inline-flex items-center justify-center h-6 text-white bg-red-500 hover:text-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm px-4 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 rounded-full"
+   {% if extras.target %}target="{{ extras.target }}"{% endif %}
+   {% slot "extra_attrs" %}
+   {% endslot %}
+   href="{{ link }}">{{ text }}</a>

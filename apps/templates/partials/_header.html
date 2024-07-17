@@ -1,0 +1,31 @@
+{% load static %}
+<header>
+  <nav class="bg-white bg-opacity-75 text-center flex mt-6 px-6 justify-between z-10">
+    <a href="{% url 'home' %}">
+      <img class="h-12 w-auto ml-4 mr-4" src="{% static 'img/logo.png' %}" />
+    </a>
+    <ul class="flex justify-center space-x-10">
+      <li class="text-2xl m-2"><a href="{% url 'home' %}" class="text-black border-b-2 border-transparent hover:border-red-500">Inicio</a></li>
+      <li class="text-2xl m-2"><a class="text-black border-b-2 border-transparent hover:border-red-500">Noticias</a></li>
+      <li class="text-2xl m-2"><a class="text-black border-b-2 border-transparent hover:border-red-500">Eventos</a></li>
+    </ul>
+    <div class="relative flex items-center justify-center">
+    <!--<form class="relative flex " method="get">
+      <input class="h-12 bg-gray-500" type="text" placeholder="Buscar..." name="buscar" value="{{ request.GET.buscar }}">
+      <button class="bg-gray-500 h-12 px-4 right-0" type="submit">Buscar</button>
+    </form>-->
+    <form class="max-w-md mx-auto">   
+      <div class="relative">
+        <input type="search" id="default-search" class="block w-full h-4 p-4 pr-12 text-sm text-white border border-gray-300 rounded-full bg-red-500 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder-slate-300" placeholder="Buscar..." required />
+        <button type="submit" class="absolute inset-y-0 right-0 flex items-center justify-center pr-3 text-white bg-transparent hover:text-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 rounded-full">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
+        </button>
+      </div>
+    </form>
+    <h3 class="text-red-700 text-xl ml-4 mr-4">{{ user.username | upper }}</h3>
+  </div>
+  </nav>
+</header>
+

@@ -1,0 +1,22 @@
+<div class="flex flex-col min-h-screen-height">
+    {% include "layout/_header_slim.html" %}
+    <section class="grid place-items-center min-h-full px-6 py-24 sm:py-32 lg:px-8 grow">
+        <div class="text-center">
+            {% if status == 'success' %}
+                <span class="flex items-center justify-center w-20 h-20 mx-auto mb-10 rounded-full bg-green-500 text-white">
+                    {% include "svg/_success.html" with svg_css_class="block w-3/5 h-3/5 fill-current" %}
+                </span>
+            {% else %}
+                <span class="flex items-center justify-center w-20 h-20 mx-auto mb-10 rounded-full bg-red-500 text-white">
+                    {% include "svg/_error.html" with svg_css_class="block w-3/5 h-3/5 fill-current" %}
+                </span>
+            {% endif %}
+            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">{{ title }}</h1>
+            <p class="mt-4 text-base text-gray-600 dark:text-gray-400">{{ text }}</p>
+            {% slot "actions_content" %}
+                {% component "button_link" text=button_text link=button_link size="lg" class="w-auto min-w-[200px] mt-10 mx-auto" %}{% endcomponent %}
+            {% endslot %}
+        </div>
+    </section>
+    {% include "layout/_page_footer.html" %}
+</div>

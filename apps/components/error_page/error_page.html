@@ -1,0 +1,11 @@
+<div class="flex flex-col min-h-screen-height">
+    {% include "layout/_header_slim.html" %}
+    <section class="grid place-items-center min-h-full px-6 py-24 sm:py-32 lg:px-8 grow">
+        <div class="text-center">
+            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">{{ title }}</h1>
+            <p class="mt-4 text-base text-gray-600 dark:text-gray-400">{{ text }}</p>
+            {% component "button_link" text="Go back home" link="/" size="lg" class="w-auto min-w-[200px] mt-10 mx-auto" %}{% endcomponent %}
+        </div>
+    </section>
+    {% include "layout/_page_footer.html" %}
+</div>

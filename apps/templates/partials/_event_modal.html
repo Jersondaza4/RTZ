@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<style>
+    .modal-right {
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100%;
+        margin: 0;
+    }
+    .modal-content {
+        z-index: 1050; /* Adjust the value as needed */
+    }
+</style>
+
+<div class="modal-dialog modal-right" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Edicion de evento: {{ object.tittle }}</h2>
+            <button class="close" onclick="close_modal();" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form action="{% url 'update_event' object.id %}" method="POST">
+            {% csrf_token %}
+            <div class="modal-body">
+                {{ form.as_p }}
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal">Cancelar</button>
+                <button class="btn" type="submit">Confirmar</button>
+            </div>
+        </form>
+    </div>
+</div>
+

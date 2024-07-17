@@ -1,0 +1,52 @@
+<div class="container lg:pl-0 lg:pr-sidebar-lg relative lg:h-[calc(100vh_-_theme(spacing.header))]">
+    <section class="pt-8 pb-12 lg:px-10 lg:h-full lg:overflow-y-auto">
+        <h2 class="sr-only">{{ title_section }}</h2>
+        {% slot "section" required %}
+        {% endslot %}
+    </section>
+    <aside x-data
+           x-show="$store.sideMenu.isActive"
+           @click.outside="$store.sideMenu.hide()"
+           x-transition:enter="transition ease-out duration-300"
+           x-transition:enter-start="translate-x-full"
+           x-transition:enter-end="translate-x-0"
+           x-transition:leave="transition ease-in duration-300"
+           x-transition:leave-start="translate-x-0"
+           x-transition:leave-end="translate-x-full"
+           class="side-nav bg-gray-50 px-gutter py-6 overflow-y-auto dark:bg-gray-800 border-l border-gray-200 dark:border-gray-800 fixed top-header h-[calc(100vh_-_theme(spacing.header))] right-0 w-sidebar-lg z-50">
+        <h2 class="sr-only">{{ title_aside }}</h2>
+        {% slot "aside" required %}
+        {% endslot %}
+    </aside>
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('sideMenu', {
+                isActive: false,
+                overlay: document.createElement('div'),
+                show(isDesktop = false) {
+                    this.isActive = true;
+                    document.scrollingElement.style.overflow = isDesktop ? 'visible' : 'hidden';
+                    isDesktop ? this.removeOverlay() : document.body.appendChild(this.overlay);
+                },
+                hide() {
+                    if (window.matchMedia("(max-width: 1024px)").matches) {
+                        this.isActive = false;
+                        setTimeout(() => document.scrollingElement.style.overflow = 'visible', 500);
+                        this.removeOverlay();
+                    }
+                },
+                removeOverlay() {
+                    let overlayDom = document.querySelector('.js-overlay');
+                    overlayDom && overlayDom.remove();
+                },
+                init() {
+                    Alpine.store('matchMedia').watchBreakpoint('(min-width: 1024px)', mediaQueryMatches => {
+                        if (mediaQueryMatches) this.show(mediaQueryMatches);
+                        else this.hide();
+                    });
+                    this.overlay.className = 'js-overlay overlay'
+                }
+            });
+        });
+    </script>
+</div>

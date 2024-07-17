@@ -1,0 +1,25 @@
+{% if show_label %}
+    <div class="field" id="{{ element.auto_id }}">
+        <label class="field__label" for="{{ element.auto_id }}">{{ element.label }}</label>
+    {% endif %}
+    {% slot "input" %}
+        <select id="{{ element.auto_id }}"
+                name="{{ element.name }}"
+                {% if element.field.widget.allow_multiple_selected %}multiple{% endif %}
+                {% if element.field.required %}required{% endif %}
+                {% include "./_attrs.html" %}
+                {% slot "extra_attrs" %}
+                {% endslot %}>
+            {% for value, label in element.field.choices %}
+                <option value="{{ value|stringformat:'s' }}"
+                        {% if element.field.initial == value or element.value == value %}selected{% endif %}>
+                    {{ label }}
+                </option>
+            {% endfor %}
+        </select>
+    {% endslot %}
+    {{ element.errors }}
+    {% if show_help_text and element.help_text %}
+        <div class="field__help-text">{{ element.help_text|safe }}</div>
+    {% endif %}
+    {% if show_label %}</div>{% endif %}

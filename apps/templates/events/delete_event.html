@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<title>{% block title %}Eliminar evento{% endblock title %}</title>
+
+{% block content %}
+<section>
+  <article>
+    <h1>Eliminar evento</h1>
+      <div class="column">
+        <form action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <h2>¿Desea Eliminar el Evento? {{ event.tittle }}</h2>
+          <button type="submit" id="button">Eliminar</button>
+          <a href="{% url 'events' %}">Cancelar</a>
+        </form>
+      </div>
+  </article>
+</section>
+{% endblock %}
