@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <style>
+    #myCanvas {
+      background-image: url('{% static "img/monaco.jpg" %}');
+      background-size: cover;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="myCanvas" width="500" height="500"></canvas>
+  <script>
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+    const image = new Image();
+    const pointRadius = 8;
+    const pointColor = 'red';
+
+    // Load the image and draw it on the canvas
+    image.src = '{% static "img/monaco.jpg" %}';
+    image.onload = function() {
+      canvas.width = image.width;
+      canvas.height = image.height;
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+      // Set up the image data for analyzing the path
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+      const pathColor = [0, 0, 0]; // Black color (R, G, B)
+
+      // Function to find the nearest point on the path
+      function findNearestPoint(x, y) {//230,110
+        const radius = 8; // Ajusta el radio de búsqueda según sea necesario
+        //console.log('x,y',x,y)
+        for (let i = x - radius; i <= x + radius; i++) {
+            //i=220
+          for (let j = y - radius; j <= y + radius; j++) {
+            //j=100
+            //console.log('i,j',i,j)
+            //console.log('j',j)
+            const index = (j * canvas.width + i) * 4;
+            //console.log('data[index]',data[index])
+            //console.log('data[index + 1]',data[index + 1])
+            //console.log('data[index + 2]',data[index + 2])
+            if (data[index] === pathColor[0] &&
+                data[index + 1] === pathColor[1] &&
+                data[index + 2] === pathColor[2]) {
+                
+                    return { x: i, y: j };
+                
+            }
+          }
+        }
+        // Si no se encuentra un punto cercano, regresa el punto actual
+        console.log('x1,y1',x,y)
+        return { x, y };
+      }
+
+      // Function to move the point along the path
+      function movePoint() {
+        // Encuentra el punto más cercano en el trazado
+        console.log('punto actual',Math.round(currentX),Math.round(currentY))
+        const nearestPoint = findNearestPoint(Math.round(currentX), Math.round(currentY));
+
+        // Mueve hacia el punto más cercano
+        const dx = nearestPoint.x+1 - currentX;
+        const dy = nearestPoint.y+1 - currentY;
+        const distanceToTravel = Math.sqrt(dx**2 + dy**2);
+        //console.log(distanceToTravel)
+
+        // Normaliza el vector de dirección
+        const dxNormalized = dx / distanceToTravel;
+        const dyNormalized = dy / distanceToTravel;
+
+        // Actualiza la posición actual
+        currentX += dxNormalized;
+        currentY += dyNormalized;
+
+        // Dibuja el punto
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+        ctx.arc(currentX, currentY, pointRadius, 0, Math.PI * 2, false);
+        ctx.fillStyle = pointColor;
+        ctx.fill();
+
+        console.log('punto encontrado',currentX,currentY)
+
+        // Solicita la próxima animación de cuadro
+        requestAnimationFrame(movePoint);
+      }
+
+      // Posición inicial del punto (ajústala según sea necesario)
+      let currentX = canvas.width / 2; // Ajusta según sea necesario
+      let currentY = canvas.height / 2; // Ajusta según sea necesario
+
+      // Mueve el punto a lo largo del trazado
+      movePoint(); // Utiliza requestAnimationFrame en lugar de setInterval
+    };
+  </script>
+</body>
+</html>

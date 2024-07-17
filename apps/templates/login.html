@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<title>{% block title %}Login{% endblock title %}</title>
+
+{% block content %}
+<!--<section>
+    <div class="row">
+      <form action="" method="post">
+        {% csrf_token %}
+        <div>
+          <label>Nombre de usuario</label>
+          <input type="text" name="user_name" placeholder="Ingrese email">
+        </div>
+        <div>
+          <label>Contraseña</label>
+          <input type="password" name="password" placeholder="*********">
+        </div>
+        <div>
+          <button type="submit">Ingresar</button>
+        </div>
+      </form>
+    </div>
+</section>-->
+{% if form.non_fields.errors %}
+  <p>form.non_fields.errors</p>
+{% endif %}
+<!--Es correcto obtener mensajes a traves de funcones y no accediendo directamente a los atributos-->
+{% if form.error_messages %}
+  <p>Advertencia: {{ form.get_invalid_login_error }}</p>
+{% endif %}
+
+{% if form.errors %}
+  <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+<form method="post">
+  {% csrf_token %}
+  <div>
+    <label>Nombre de usuario.</label>
+      <td>{{ form.username }}</td>
+  </div>
+  <div>
+    <label>Contraseña</label>
+      <td>{{ form.password }}</td>
+  </div>
+  <button type="submit">Ingresar</button>
+</form>
+
+{% endblock %}

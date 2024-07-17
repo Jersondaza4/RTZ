@@ -1,0 +1,9 @@
+<a aria-label="{{ text }}"
+   class="btn-icon {% if color == 'primary' %}btn--primary{% elif color == 'secondary' %}btn--secondary{% elif color == 'tertiary' %}btn--tertiary{% endif %} {% if size == 'xs' %}btn-icon--xs{% elif size == 'sm' %}btn-icon--sm{% elif size == 'md' %}btn-icon--md{% elif size == 'lg' %}btn-icon--lg{% endif %} {% if extras.class %}{{ extras.class }}{% endif %}"
+   href="{{ link }}"
+   {% if extras.target %}target="{{ extras.target }}"{% endif %}
+   {% slot "extra_attrs" %}
+   {% endslot %}>
+    {% slot "btn_svg" required default %}
+    {% endslot %}
+</a>

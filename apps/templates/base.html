@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{% block title %}RTZ{% endblock title %} | Race Time Zone</title>
+    <meta name="description" content="A brief description" />
+    <meta
+      name="author"
+      content="Tu destino definitivo para las últimas noticias, emocionantes eventos y contenido exclusivo del mundo de las carreras de automovilismo. Únete a nuestra comunidad de entusiastas y experimenta la velocidad y la emoción como nunca antes."
+    />
+
+    <!-- Load favicon -->
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'img/favicon1.ico' %}"
+    />
+
+    <!-- Include your CSS files here -->
+    <link
+      rel="preload"
+      as="style"
+      href="{% static 'css/style.css' %}"
+      onload="this.rel = 'stylesheet'"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Karla&family=Markazi+Text:wght@500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="bg-slate-100">
+    <!--Header content-->
+    <header class="fixed w-full z-50">{% include 'partials/_header.html' %}</header>
+    
+
+    <main>{% block content %} {% endblock %}</main>
+
+    <!--Footer content-->
+    {% include 'partials/_footer.html' %}
+    <!-- Replace this comment with your code  -->
+
+    {% block extrajs %}
+    {% endblock extrajs %}
+  </body>
+</html>

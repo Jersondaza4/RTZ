@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<title>{% block title %}Evento {{ object.tittle }}{% endblock title %}</title>
+
+{% block content %}
+<h1>Evento</h1>
+<!--Begin col-->
+<div class="column">
+    {% if object %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Tittle</th>
+                    <th>Banner</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            <tr>
+                <td>{{ object.id }}</td>
+                <td>{{ object.tittle }}</td>
+                <td style="text-align: center; vertical-align: middle;"><img src="{{ event.image.url }}" alt="{{ event.tittle}}" class="image-list"/></td>
+                <td><a href="{% url 'delete_event' event.id %}" >Registrarme</a></td>
+            </tr>  
+                
+            </tbody>
+        </table>
+    {% else %}
+        <p>No existe el evento</p>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,78 @@
+<style>
+    /* Estilos del modal */
+    .modal {
+        display: none; /* Oculto por defecto */
+        position: fixed; /* Fijo a la pantalla */
+        z-index: 1000; /* Colocado sobre otros elementos */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* Activar scroll si es necesario */
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+    }
+
+    .modal-content {
+        position: relative;
+        margin: 15% auto; /* 15% desde la parte superior y centrado horizontalmente */
+        padding: 20px;
+        width: 80%; /* Ancho del modal */
+        background-color: rgb(22, 21, 21); /* Fondo del contenido */
+        border-radius: 5px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-header, .modal-body, .modal-footer {
+        padding: 10px;
+    }
+
+    .modal-header {
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .modal-footer {
+        border-top: 1px solid #e5e5e5;
+        text-align: right;
+    }
+
+    .close {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+</style>
+
+<div class="relative flex bg-black bg-opacity-90">
+    <div class="relative w-full p-7 mt-16 px-16 flex justify-center">
+        <section>
+            <article>
+                <div id="create-modal-body">
+                    <div class="modal-header">
+                        <h2 class="text-white">Creación de evento</h2>
+                        <span class="close" onclick="closeModal('create-modal')">&times;</span>
+                    </div>
+                    <form class="w-full max-w-lg border-black border-2 p-2 text-white" id="create-event-form" action="{% url 'create_event_modal' %}" method="post" enctype="multipart/form-data" onsubmit="handleSubmitForm(event, 'create-event-form')">
+                        {% csrf_token %}
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <div class="w-full px-3 mb-6 md:mb-0">
+                                {% component "field" element=form.tittle %}{% endcomponent %}
+                                {% component "field" element=form.description %}{% endcomponent %}
+                                {% component "field" element=form.event_date %}{% endcomponent %}
+                                {% component "field" element=form.place %}{% endcomponent %}
+                                {% component "field" element=form.type %}{% endcomponent %}
+                                {% component "field" element=form.image %}{% endcomponent %}
+                                {% component "button" text="Enviar" type_button="submit" %}{% endcomponent %}
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" onclick="closeModal('create-modal')">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </article>
+        </section>
+    </div>
+</div>
