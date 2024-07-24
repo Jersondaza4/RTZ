@@ -1,0 +1,35 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:14.5-alpine
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - .:/tmp/data/
+  redis:
+    image: redis:6-alpine
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+  tailwind:
+    image: jersondaza04/rtz:latest
+    command: >
+      sh -c "pnpm install && python manage.py tailwind start"
+    tty: true
+    volumes:
+      - .:/code
+  web:
+    image: jersondaza04/rtz:latest
+    command: >
+      sh -c "python manage.py wait_for_db &&
+             python manage.py migrate --noinput | cat &&
+             python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/code
+    depends_on:
+      - postgres
+      - redis
