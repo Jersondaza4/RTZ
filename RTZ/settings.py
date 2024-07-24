@@ -46,6 +46,7 @@ INSTALLED_APPS = PROJECT_APPS + [
     'django.contrib.messages',
     'django_components',
     'django_components.safer_staticfiles',
+    'django_extensions',
     'tailwind',
     'tinymce',
     'import_export',

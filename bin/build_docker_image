@@ -1,0 +1,1 @@
+docker build -t jersondaza04/rtz:latest --push .

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euxo pipefail
+# Uncomment and add the additional system packages you need for the project. For example: ffmpeg.
+# export DEBIAN_FRONTEND=noninteractive
+# apt-get install --no-install-recommends

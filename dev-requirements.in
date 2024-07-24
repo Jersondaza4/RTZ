@@ -1,0 +1,13 @@
+-c requirements.txt
+black
+django-debug-toolbar
+djlint
+freezegun
+pre-commit
+pytest-cov
+pytest-django
+pytest-factoryboy
+pytest-mock
+pytest-sugar
+pytest-xdist
+ruff

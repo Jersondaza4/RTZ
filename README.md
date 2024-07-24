@@ -27,6 +27,10 @@ Add the package name to the `requirements.in` or `dev-requirements.in` file and 
     docker compose exec web uv pip compile --generate-hashes dev-requirements.in -o dev-requirements.txt -v
     ./bin/build_docker_image
 
+    en windows local:
+    python -m piptools compile --generate-hashes requirements.in -o requirements.txt -v
+    python -m piptools compile --generate-hashes dev-requirements.in -o dev-requirements.txt -v
+
 To upgrade pre-commit versions:
 
     pre-commit autoupdate
@@ -48,6 +52,10 @@ For python packages run:
     docker compose exec web uv pip compile --generate-hashes --upgrade requirements.in -o requirements.txt -v
     docker compose exec web uv pip compile --generate-hashes --upgrade dev-requirements.in -o dev-requirements.txt -v
     ./bin/build_docker_image
+
+    en windows local:
+    python -m piptools compile --generate-hashes --upgrade requirements.in -o requirements.txt -v
+    python -m piptools compile --generate-hashes --upgrade dev-requirements.in -o dev-requirements.txt -v
 
 ## Local email
 
